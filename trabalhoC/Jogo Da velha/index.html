@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Velha</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      cursor: pointer;
+    }
+
+    .cell:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="board" id="tabuleiro">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
+    </div>
+  </div>
+
+  <script>
+    const tabuleiro = document.getElementById('tabuleiro');
+    const celulas = tabuleiro.querySelectorAll('.cell');
+    let jogadorAtual = 'X';
+    let jogoTerminou = false;
+
+    celulas.forEach(celula => {
+      celula.addEventListener('click', handleCliqueCelula);
+    });
+
+    function handleCliqueCelula() {
+      if (jogoTerminou || this.textContent !== '') return;
+
+      this.textContent = jogadorAtual;
+
+      if (verificarVencedor()) {
+        alert(jogadorAtual + ' ganhou!');
+        jogoTerminou = true;
+        return;
+      }
+
+      if (verificarEmpate()) {
+        alert('Empate!');
+        jogoTerminou = true;
+        return;
+      }
+
+      jogadorAtual = jogadorAtual === 'X' ? 'O' : 'X';
+    }
+
+    function verificarVencedor() {
+      const combinacoesVencedoras = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+      return combinacoesVencedoras.some(comb => {
+        const [a, b, c] = comb;
+        return celulas[a].textContent === jogadorAtual &&
+          celulas[b].textContent === jogadorAtual &&
+          celulas[c].textContent === jogadorAtual;
+      });
+    }
+
+    function verificarEmpate() {
+      return [...celulas].every(celula => celula.textContent !== '');
+    }
+  </script>
+</body>
+
+</html>

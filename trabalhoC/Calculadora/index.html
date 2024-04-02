@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Salário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Calculadora de Salário</h2>
+        <input type="number" id="salarioAtual" placeholder="Salário atual">
+        <input type="number" id="aumentoPercentual" placeholder="Aumento percentual (%)">
+        <button onclick="calcularNovoSalario()">Calcular Novo Salário</button>
+        <h3 id="novoSalario"></h3>
+    </div>
+
+    <script>
+        function calcularNovoSalario() {
+            var salarioAtual = parseFloat(document.getElementById('salarioAtual').value);
+            var aumentoPercentual = parseFloat(document.getElementById('aumentoPercentual').value);
+            var novoSalario = salarioAtual + (salarioAtual * aumentoPercentual / 100);
+            document.getElementById('novoSalario').innerHTML = "Novo salário: R$ " + novoSalario.toFixed(2);
+        }
+    </script>
+
+</body>
+
+</html>

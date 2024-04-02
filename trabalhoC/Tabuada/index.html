@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Tabuada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Consulta de Tabuada</h2>
+        <label for="numero">Digite o número da tabuada que gostaria de consultar:</label><br>
+        <input type="number" id="numero" min="1" max="12"><br><br>
+        <button onclick="consultarTabuada()">Consultar</button><br><br>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function consultarTabuada() {
+            var numero = document.getElementById('numero').value;
+            var resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = '';
+
+            if (numero >= 1 && numero <= 12) {
+                for (var i = 1; i <= 10; i++) {
+                    var resultado = numero + ' x ' + i + ' = ' + (numero * i) + '<br>';
+                    resultadoDiv.innerHTML += resultado;
+                }
+            } else {
+                resultadoDiv.innerHTML = 'Por favor, insira um número entre 1 e 12.';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem Regressiva</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+
+        #countdown {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Contagem Regressiva</h2>
+        <input type="number" id="countdownNumber" placeholder="Insira o número">
+        <button onclick="startCountdown()">Iniciar Contagem</button>
+        <div id="countdown"></div>
+    </div>
+
+    <script>
+        function startCountdown() {
+            var countdownNumber = parseInt(document.getElementById('countdownNumber').value);
+
+            var countdownDiv = document.getElementById('countdown');
+            countdownDiv.innerHTML = countdownNumber;
+
+            var countdownInterval = setInterval(function () {
+                countdownNumber--;
+                countdownDiv.innerHTML = countdownNumber;
+
+                if (countdownNumber <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownDiv.innerHTML = "Fim!";
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+
+</html>
